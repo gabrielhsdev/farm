@@ -1,0 +1,23 @@
+{
+  "name": "marketplace-agricultura-familiar-backend",
+  "version": "1.0.0",
+  "description": "Backend REST do Marketplace de Agricultura Familiar (Fase 2)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "db:init": "node db/init.js",
+    "db:reset": "node db/init.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
