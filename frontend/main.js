@@ -9,6 +9,13 @@ import { renderRegistro } from './pages/registro.js';
 import { renderAgricultoresLista } from './pages/agricultores-lista.js';
 import { renderAgricultorPerfil } from './pages/agricultor-perfil.js';
 import { renderEmBreve } from './pages/em-breve.js';
+import { renderCarrinho } from './pages/carrinho.js';
+import { renderConversasLista } from './pages/conversas-lista.js';
+import { renderConversa, renderConversaCom } from './pages/conversa.js';
+import { renderMeuPerfil } from './pages/meu-perfil.js';
+import { renderMeusProdutos } from './pages/meus-produtos.js';
+import { renderPedidosLista } from './pages/pedidos-lista.js';
+import { renderPedidoDetalhe } from './pages/pedido-detalhe.js';
 
 // =============================================================
 // Header global
@@ -121,25 +128,27 @@ router.register('#/registro', renderRegistro);
 router.register('#/agricultores', renderAgricultoresLista);
 router.register('#/agricultores/:id', renderAgricultorPerfil);
 
-// Placeholders — Fase B (carrinho + chat)
+// Fase B — carrinho + chat
 router.register('#/carrinho/:agricultorId',
-  exigirRole('cliente', renderEmBreve('B', 'Carrinho')));
+  exigirRole('cliente', renderCarrinho));
 router.register('#/conversas',
-  exigirRole(null, renderEmBreve('B', 'Conversas')));
+  exigirRole(null, renderConversasLista));
+router.register('#/conversas/com/:outroId',
+  exigirRole(null, renderConversaCom));
 router.register('#/conversas/:id',
-  exigirRole(null, renderEmBreve('B', 'Conversa')));
+  exigirRole(null, renderConversa));
 
-// Placeholders — Fase C (área do agricultor)
+// Fase C — área do agricultor
 router.register('#/meu-perfil',
-  exigirRole('agricultor', renderEmBreve('C', 'Meu perfil')));
+  exigirRole('agricultor', renderMeuPerfil));
 router.register('#/meus-produtos',
-  exigirRole('agricultor', renderEmBreve('C', 'Meus produtos')));
+  exigirRole('agricultor', renderMeusProdutos));
 
-// Placeholders — Fase D (pedidos)
+// Fase D — pedidos (cliente + agricultor)
 router.register('#/pedidos',
-  exigirRole(null, renderEmBreve('D', 'Pedidos')));
+  exigirRole(null, renderPedidosLista));
 router.register('#/pedidos/:id',
-  exigirRole(null, renderEmBreve('D', 'Detalhes do pedido')));
+  exigirRole(null, renderPedidoDetalhe));
 
 // 404
 router.setNotFound(({ outlet }) => {

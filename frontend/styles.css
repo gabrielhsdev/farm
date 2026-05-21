@@ -682,6 +682,1174 @@ button {
 }
 
 /* =========================================================
+   Toast (efêmero, canto inferior direito)
+   ========================================================= */
+.toast {
+  position: fixed;
+  right: var(--space-6);
+  bottom: var(--space-6);
+  z-index: 50;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 0.9rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.2s, transform 0.2s;
+  max-width: 360px;
+}
+
+.toast.toast-in { opacity: 1; transform: translateY(0); }
+.toast.toast-out { opacity: 0; transform: translateY(8px); }
+
+.toast-success { border-left: 3px solid var(--color-success); }
+.toast-info    { border-left: 3px solid var(--color-primary); }
+.toast-error   { border-left: 3px solid var(--color-danger); }
+
+/* =========================================================
+   Adicionar ao carrinho — prompt inline no card de produto
+   ========================================================= */
+.produto-actions {
+  margin-top: var(--space-2);
+}
+
+.add-cart-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--color-primary-light);
+  border-radius: var(--radius-sm);
+}
+
+.add-cart-form .form-field {
+  gap: var(--space-1);
+}
+
+.add-cart-form input[type="number"] {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}
+
+.add-cart-form input[type="number"]:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(74, 124, 58, 0.15);
+}
+
+.add-cart-actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.add-cart-actions .btn { flex: 1; }
+
+.add-cart-ok {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  border: 1px solid var(--color-success);
+  background: var(--color-primary-light);
+  color: var(--color-success);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+/* =========================================================
+   Carrinho
+   ========================================================= */
+.carrinho-header {
+  margin-bottom: var(--space-4);
+}
+
+.carrinho-header-linha {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.carrinho-header-info { display: flex; flex-direction: column; }
+.carrinho-header-info .page-subtitle { margin: 0; }
+
+.carrinho-header-link {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--color-primary);
+}
+
+.carrinho-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.carrinho-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.carrinho-item {
+  display: grid;
+  grid-template-columns: 64px 1fr 120px 110px 40px;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+
+.carrinho-item-foto {
+  width: 64px;
+  height: 64px;
+  background: var(--color-primary-light);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+.carrinho-item-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carrinho-item-corpo { min-width: 0; }
+.carrinho-item-nome { margin: 0; font-weight: 600; }
+.carrinho-item-unit {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.carrinho-item-qtd {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.carrinho-item-qtd label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.carrinho-item-qtd input {
+  width: 80px;
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.carrinho-item-qtd input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(74, 124, 58, 0.15);
+}
+
+.carrinho-item-subtotal {
+  font-weight: 600;
+  color: var(--color-primary);
+  text-align: right;
+}
+
+.carrinho-item-remover {
+  padding: var(--space-1) var(--space-2);
+  font-size: 1.1rem;
+}
+
+.carrinho-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 1.1rem;
+}
+
+.carrinho-total-label {
+  color: var(--color-text-muted);
+}
+
+.carrinho-total-valor {
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: 1.5rem;
+}
+
+.carrinho-erro-slot:empty { display: none; }
+
+.carrinho-acoes {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.carrinho-acoes .btn { flex: 1; min-width: 200px; padding: var(--space-3) var(--space-4); }
+
+.carrinho-rodape {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-2);
+}
+
+.carrinho-vazio-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-4);
+}
+
+/* =========================================================
+   Conversas — lista
+   ========================================================= */
+.conversas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.card-conversa {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+}
+
+.conversa-corpo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.conversa-nome {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.conversa-preview {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conversa-data {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+/* =========================================================
+   Conversa — tela de chat
+   ========================================================= */
+.conversa-root {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  height: calc(100vh - 180px);
+  min-height: 480px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.conversa-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.conversa-btn-voltar {
+  padding: var(--space-1) var(--space-2);
+  font-size: 0.9rem;
+}
+
+.conversa-header-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.conversa-header-nome {
+  margin: 0;
+  font-weight: 600;
+}
+
+.conversa-header-sub {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.conversa-mensagens {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  background: var(--color-bg);
+}
+
+.conversa-dia {
+  align-self: center;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  margin: var(--space-2) 0;
+}
+
+.conversa-erro-envio { padding: 0 var(--space-4); }
+.conversa-erro-envio:empty { display: none; }
+
+.conversa-form {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.conversa-form input[type="text"] {
+  flex: 1;
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.conversa-form input[type="text"]:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(74, 124, 58, 0.15);
+}
+
+/* =========================================================
+   Conversa — bolhas
+   ========================================================= */
+.bolha-wrap {
+  display: flex;
+  width: 100%;
+}
+
+.bolha-mine { justify-content: flex-end; }
+.bolha-other { justify-content: flex-start; }
+
+.bolha {
+  max-width: 72%;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  word-wrap: break-word;
+  line-height: 1.35;
+}
+
+.bolha-texto { font-size: 0.95rem; }
+
+.bolha-mine .bolha {
+  background: var(--color-primary);
+  color: var(--color-surface);
+  border-bottom-right-radius: 4px;
+}
+
+.bolha-other .bolha {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-bottom-left-radius: 4px;
+}
+
+.bolha-conteudo {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.bolha-hora {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  align-self: flex-end;
+}
+
+.bolha-mine .bolha-hora { color: rgba(255, 255, 255, 0.85); }
+.bolha-other .bolha-hora { color: var(--color-text-muted); }
+
+/* =========================================================
+   Snapshot bubble
+   ========================================================= */
+.bolha-snapshot {
+  max-width: 86%;
+  min-width: 240px;
+  background: var(--color-surface) !important;
+  color: var(--color-text) !important;
+  border: 1px solid var(--color-border) !important;
+  padding: var(--space-3) !important;
+}
+
+.bolha-mine .bolha-snapshot {
+  border-color: var(--color-primary) !important;
+}
+
+.snap-titulo {
+  margin: 0 0 var(--space-2) 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+.snap-itens {
+  list-style: none;
+  margin: 0 0 var(--space-2) 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.snap-item {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: 0.9rem;
+  border-bottom: 1px dashed var(--color-border);
+  padding-bottom: var(--space-1);
+}
+
+.snap-item-nome { color: var(--color-text); }
+.snap-item-valor { color: var(--color-primary); font-weight: 500; }
+
+.snap-item-extra {
+  color: var(--color-text-muted);
+  font-style: italic;
+  justify-content: flex-start;
+  border-bottom: none;
+}
+
+.snap-total {
+  display: flex;
+  justify-content: space-between;
+  padding-top: var(--space-1);
+  font-size: 1rem;
+}
+
+.snap-total strong {
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
+.snap-btn-pedido {
+  margin-top: var(--space-2);
+}
+
+/* Hora dentro da bolha de snapshot fica em cinza (não mais branco do primary) */
+.bolha-mine .bolha-snapshot .bolha-hora { color: var(--color-text-muted); }
+
+
+/* =========================================================
+   Meu perfil (agricultor) — Fase C
+   ========================================================= */
+.meu-perfil-header {
+  margin-bottom: var(--space-6);
+}
+
+.form-perfil {
+  max-width: 640px;
+}
+
+.form-perfil h2 {
+  margin-top: 0;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+/* Linha com 2 campos lado a lado (cidade/UF, lat/lng, preço/unidade) */
+.form-linha-dupla {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-end;
+}
+
+.form-linha-dupla > .form-field {
+  flex: 1;
+  min-width: 0;
+}
+
+.form-linha-flex {
+  flex: 2;
+}
+
+/* Contador de caracteres */
+.form-contador {
+  align-self: flex-end;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Rodapé do form de perfil */
+.form-acoes {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.form-acoes .btn {
+  flex: 1;
+  min-width: 180px;
+}
+
+/* =========================================================
+   Upload de foto — componente reusável — Fase C
+   ========================================================= */
+.upload-foto {
+  /* Herdam o estilo de .form-field, mas precisa de um container interno */
+}
+
+.upload-foto-linha {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.upload-foto-preview {
+  width: 96px;
+  height: 96px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-light);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.upload-foto-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upload-foto-placeholder {
+  text-align: center;
+  padding: var(--space-2);
+}
+
+.upload-foto-acoes {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.upload-foto-erro {
+  color: var(--color-danger);
+  font-size: 0.85rem;
+  margin-top: var(--space-1);
+}
+
+.upload-foto-erro:empty {
+  display: none;
+}
+
+/* =========================================================
+   Meus produtos — Fase C
+   ========================================================= */
+.meus-produtos-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.meus-produtos-header > div {
+  flex: 1;
+  min-width: 240px;
+}
+
+.meus-produtos-erro-slot:empty {
+  display: none;
+}
+
+.meus-produtos-vazio {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.meus-produtos-vazio-acao {
+  display: flex;
+  justify-content: center;
+}
+
+/* Card de produto do agricultor: estende .card-produto com a barra de ações no final */
+.card-meu-produto .meu-produto-acoes {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+.card-meu-produto .meu-produto-acoes .btn {
+  flex: 1;
+}
+
+.card-meu-produto .meu-produto-btn-inativar {
+  color: var(--color-danger);
+}
+
+.card-meu-produto .meu-produto-btn-inativar:hover:not(:disabled) {
+  background: #fbe9e9;
+  color: var(--color-danger);
+}
+
+/* Chip pequeno pra categoria, reaproveitando o tom primário claro */
+.produto-categoria.chip {
+  align-self: flex-start;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 2px var(--space-2);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* =========================================================
+   Modal de produto — Fase C
+   ========================================================= */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 24, 18, 0.55);
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--space-6) var(--space-4);
+  overflow-y: auto;
+}
+
+body.modal-aberto {
+  overflow: hidden;
+}
+
+.modal-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - var(--space-8));
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.modal-close {
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0 var(--space-2);
+  min-width: 32px;
+  height: 32px;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  overflow-y: auto;
+}
+
+.modal-footer {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: flex-end;
+  margin-top: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+/* =========================================================
+   Pedidos — lista — Fase D
+   ========================================================= */
+.pedidos-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.chip-filtro {
+  padding: var(--space-2) var(--space-4);
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.chip-filtro:hover:not(.is-active) {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary-light);
+}
+.chip-filtro.is-active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-surface);
+}
+
+.pedidos-lista-area {
+  margin-top: var(--space-2);
+}
+
+.pedidos-tabela {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.pedidos-tabela-cabecalho,
+.pedido-linha {
+  display: grid;
+  grid-template-columns: 110px 1fr 120px 110px;
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+}
+
+.pedidos-tabela-cabecalho {
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.pedido-linha {
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.12s;
+  text-decoration: none;
+}
+.pedido-linha:hover {
+  background: var(--color-primary-light);
+  text-decoration: none;
+}
+.pedido-linha:first-of-type { border-top: none; }
+
+.pedido-linha-data {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+.pedido-linha-outro {
+  color: var(--color-text);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pedido-linha-total {
+  font-weight: 600;
+}
+
+/* =========================================================
+   Status badge — Fase D
+   ========================================================= */
+.status-badge {
+  display: inline-block;
+  padding: 2px var(--space-3);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 1px solid transparent;
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  justify-self: start;
+}
+.status-badge.status-pendente {
+  background: #fcefdc;
+  border-color: #f0c98c;
+  color: #8a5b1e;
+}
+.status-badge.status-confirmado {
+  background: #dee9f7;
+  border-color: #aac3e1;
+  color: #2b5587;
+}
+.status-badge.status-entregue {
+  background: var(--color-primary-light);
+  border-color: #b6cfa6;
+  color: var(--color-primary);
+}
+.status-badge.status-cancelado {
+  background: #f1ddde;
+  border-color: #d9b5b6;
+  color: var(--color-danger);
+}
+
+/* =========================================================
+   Pedido — detalhe — Fase D
+   ========================================================= */
+.pedido-detalhe-root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.pedido-bloco {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+}
+
+.pedido-header-bloco { padding: var(--space-4) var(--space-6); }
+
+.pedido-header-linha {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.pedido-titulo {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.pedido-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+.pedido-meta-sep { color: var(--color-border); }
+
+.pedido-bloco-titulo {
+  font-size: 1rem;
+  margin: 0 0 var(--space-3) 0;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.pedido-partes-grid,
+.pedido-detalhes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.pedido-parte {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.pedido-parte-label {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+.pedido-parte-valor {
+  color: var(--color-text);
+  font-weight: 500;
+}
+a.pedido-parte-valor { color: var(--color-primary); }
+
+.pedido-partes-acoes {
+  margin-top: var(--space-4);
+}
+
+/* Tabela de itens (grid, sem <table>) */
+.pedido-itens-tabela {
+  display: flex;
+  flex-direction: column;
+}
+
+.pedido-itens-cab,
+.pedido-item-linha {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1fr 1fr;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  align-items: center;
+}
+
+.pedido-itens-cab {
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  padding-bottom: var(--space-2);
+}
+
+.pedido-item-linha {
+  border-top: 1px solid var(--color-border);
+}
+.pedido-item-linha:first-of-type { border-top: none; }
+
+.pedido-item-nome { font-weight: 500; }
+.pedido-item-qtd,
+.pedido-item-preco { color: var(--color-text-muted); font-size: 0.9rem; }
+.pedido-item-subtotal { font-weight: 500; text-align: right; }
+
+.pedido-itens-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 2px solid var(--color-border);
+  font-size: 1.125rem;
+}
+.pedido-itens-total strong { color: var(--color-primary); }
+
+.pedido-obs {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.pedido-obs-texto {
+  margin: 0;
+  padding: var(--space-3);
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+}
+
+.pedido-detalhe-erro-acoes:empty { display: none; }
+
+.pedido-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.pedido-acao-destrutiva {
+  color: var(--color-danger);
+}
+.pedido-acao-destrutiva:hover:not(:disabled) {
+  background: #fbe9e9;
+  color: var(--color-danger);
+}
+
+.pedido-sem-acoes {
+  margin: 0;
+  font-style: italic;
+}
+
+/* "Já avaliado" block */
+.pedido-ja-avaliado {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-primary-light);
+  border-radius: var(--radius-sm);
+  width: 100%;
+}
+.pedido-ja-avaliado-cabec {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+.pedido-ja-avaliado-titulo {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+.pedido-ja-avaliado-stars { font-size: 1.125rem; letter-spacing: 1px; }
+.pedido-ja-avaliado-stars .stars { color: var(--color-accent); }
+.pedido-ja-avaliado-stars .stars-empty { color: var(--color-border); }
+.pedido-ja-avaliado-comentario {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  font-style: italic;
+}
+.pedido-ja-avaliado-editar {
+  align-self: flex-start;
+  padding: 2px var(--space-3);
+  font-size: 0.85rem;
+}
+
+/* =========================================================
+   Modal de gerar pedido — Fase D
+   ========================================================= */
+.modal-snap-resumo {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.modal-snap-titulo {
+  margin: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.modal-snap-itens {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.modal-snap-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  gap: var(--space-3);
+}
+.modal-snap-item-nome {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.modal-snap-item-extra {
+  color: var(--color-text-muted);
+  font-style: italic;
+  justify-content: flex-start;
+}
+
+.modal-snap-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-2);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border);
+  font-weight: 600;
+}
+.modal-snap-total strong { color: var(--color-primary); }
+
+/* =========================================================
+   Modal de avaliação — Fase D
+   ========================================================= */
+.modal-card-avaliacao { max-width: 460px; }
+
+.modal-aval-intro {
+  margin: 0 0 var(--space-2) 0;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.modal-aval-estrelas-wrap {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-3) 0;
+}
+
+/* =========================================================
+   Estrelas interativas — Fase D
+   ========================================================= */
+.stars-input {
+  display: inline-flex;
+  gap: var(--space-2);
+}
+
+.stars-input-star {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 40px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-border);
+  transition: color 0.12s, transform 0.08s;
+}
+.stars-input-star:hover { transform: scale(1.05); }
+.stars-input-star:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.stars-input-star.is-active {
+  color: var(--color-accent);
+}
+
+/* =========================================================
    Responsive
    ========================================================= */
 @media (max-width: 700px) {
@@ -715,4 +1883,76 @@ button {
   .radio-group {
     flex-direction: column;
   }
+
+  /* Carrinho — empilha verticalmente no mobile */
+  .carrinho-item {
+    grid-template-columns: 56px 1fr;
+    grid-template-areas:
+      "foto corpo"
+      "qtd qtd"
+      "sub remover";
+    gap: var(--space-2);
+  }
+  .carrinho-item-foto { grid-area: foto; width: 56px; height: 56px; }
+  .carrinho-item-corpo { grid-area: corpo; }
+  .carrinho-item-qtd { grid-area: qtd; }
+  .carrinho-item-subtotal { grid-area: sub; text-align: left; }
+  .carrinho-item-remover { grid-area: remover; justify-self: end; }
+  .carrinho-acoes .btn { min-width: 0; width: 100%; }
+
+  /* Bolha um pouco mais larga no mobile */
+  .bolha { max-width: 88%; }
+  .bolha-snapshot { max-width: 92%; }
+
+  .toast { right: var(--space-3); left: var(--space-3); max-width: none; }
+
+  /* Fase C — Meu perfil + modal */
+  .form-linha-dupla {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .form-acoes .btn { min-width: 0; width: 100%; }
+  .meus-produtos-header { flex-direction: column; }
+  .meus-produtos-header .btn-primary { align-self: stretch; }
+  .modal-overlay { padding: var(--space-3); }
+  .modal-header { padding: var(--space-3) var(--space-4); }
+  .modal-form { padding: var(--space-4); }
+  .upload-foto-linha { flex-direction: column; align-items: stretch; }
+  .upload-foto-preview { align-self: center; }
+
+  /* Fase D — pedidos */
+  .pedidos-tabela-cabecalho,
+  .pedido-linha {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "data    status"
+      "outro   outro"
+      "total   total";
+    row-gap: var(--space-1);
+  }
+  .pedidos-tabela-cabecalho { display: none; }
+  .pedido-linha-data    { grid-area: data; }
+  .pedido-linha-outro   { grid-area: outro; font-weight: 600; }
+  .pedido-linha-total   { grid-area: total; }
+  .pedido-linha .status-badge { grid-area: status; justify-self: end; }
+
+  .pedido-partes-grid,
+  .pedido-detalhes-grid { grid-template-columns: 1fr; }
+
+  .pedido-itens-cab { display: none; }
+  .pedido-item-linha {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "nome   sub"
+      "qtd    preco";
+    row-gap: var(--space-1);
+  }
+  .pedido-item-nome     { grid-area: nome; }
+  .pedido-item-subtotal { grid-area: sub; }
+  .pedido-item-qtd      { grid-area: qtd; }
+  .pedido-item-preco    { grid-area: preco; text-align: right; }
+
+  .pedido-acoes .btn { width: 100%; }
+
+  .stars-input-star { font-size: 36px; }
 }
