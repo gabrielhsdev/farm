@@ -1,0 +1,9 @@
+# Archive bundles
+frontend_A.zip
+frontend_B.zip
+frontend_C.zip
+frontend_D.zip
+*_final.zip
+
+# OS files
+.DS_Store
