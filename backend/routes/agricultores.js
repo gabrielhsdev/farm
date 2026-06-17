@@ -4,6 +4,7 @@ const { requireAuth } = require('../middleware/auth');
 const { requireRole } = require('../middleware/role');
 const { paginacao } = require('../utils/validacao');
 const { httpError } = require('../middleware/error');
+const { criarImagemSeNecessario } = require('../utils/imagens');
 
 const router = express.Router();
 
@@ -114,7 +115,11 @@ router.patch('/me', requireAuth, requireRole('agricultor'), (req, res, next) => 
         throw httpError(400, 'VALIDATION', 'longitude fora de range');
       }
     }
-    if (body.foto_id !== undefined && body.foto_id !== null) {
+    // Foto de perfil: se vier foto_base64, cria a imagem e usa o id gerado;
+    // senão, aceita um foto_id já existente (validando que ele existe).
+    if (body.foto_base64) {
+      body.foto_id = criarImagemSeNecessario(body);
+    } else if (body.foto_id !== undefined && body.foto_id !== null) {
       const f = db.prepare('SELECT id FROM imagens WHERE id = ?').get(body.foto_id);
       if (!f) throw httpError(400, 'VALIDATION', 'foto_id inexistente');
     }
